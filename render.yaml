@@ -2,8 +2,9 @@ version: "1"
 services:
   - type: web
     name: cti-freshrss
-    env: docker
-    image: freshrss/freshrss:latest
+    env: image
+    image:
+      url: freshrss/freshrss:latest
     plan: free
     envVars:
       - key: CRON_MIN
