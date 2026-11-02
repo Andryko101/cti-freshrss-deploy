@@ -1,0 +1,28 @@
+version: "1"
+services:
+  - type: web
+    name: cti-freshrss
+    env: docker
+    image: freshrss/freshrss:latest
+    plan: free
+    envVars:
+      - key: CRON_MIN
+        value: 1,31
+      - key: DB_TYPE
+        value: pgsql
+      - key: DB_HOST
+        value: freshrss-db
+      - key: DB_USER
+        value: freshrss
+      - key: DB_NAME
+        value: freshrss
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: freshrss-db
+          property: password
+
+databases:
+  - name: freshrss-db
+    databaseName: freshrss
+    user: freshrss
+    plan: free
