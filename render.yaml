@@ -6,39 +6,27 @@ services:
     region: oregon # (or your chosen region)
     plan: free
     envVars:
-      - key: FRESHRSS_INSTALL
-        value: |-
-          --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user andrew --language en
-      - key: FRESHRSS_USER
-        value: |-
-          --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en --password ${ADMIN_PASSWORD} andrew
-      # Add this explicit fallback variable that the Docker entrypoint script checks:
-      - key: FRESHRSS_DEFAULT_USER
-        value: andrew
       - key: TZ
         value: UTC
       - key: BASE_URL
         value: https://cti-freshrss.onrender.com
       - key: DB_HOST
-        value: dpg-dbk6vfe7bikc739bggeg-a # Your actual internal/external PostgreSQL host
+        value: dpg-dbk6vfe7bikc739bggeg-a
       - key: DB_BASE
         value: freshrss
       - key: DB_USER
         value: freshrss
       - key: DB_PASSWORD
-        value: q3PWDCiHTJu9YORkVfdruhXU24hFatcc 
-      - key: USER
-        value: andrew
+        sync: false
       - key: ADMIN_EMAIL
         value: andrew@local.net
       - key: ADMIN_PASSWORD
         value: freshrss
       - key: ADMIN_API_PASSWORD
         value: freshrss
-      # --- Automatic Setup Bypass Variables ---
       - key: FRESHRSS_INSTALL
         value: |-
-          --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user admin --language en
+          --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user andrew --language en
       - key: FRESHRSS_USER
         value: |-
-          --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en --password ${ADMIN_PASSWORD} andrew
+          --user andrew --password ${ADMIN_PASSWORD} --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en
