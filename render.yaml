@@ -2,6 +2,7 @@ services:
   - type: web
     name: freshrss
     env: image
+    image: freshrss/freshrss:latest
     region: oregon
     plan: free
     envVars:
