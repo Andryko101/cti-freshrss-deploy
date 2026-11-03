@@ -40,9 +40,12 @@ services:
         value: freshrss
       - key: ADMIN_API_PASSWORD
         value: freshrss
+      # Explicitly set the default user variable recognized by the container entrypoint
+      - key: FRESHRSS_DEFAULT_USER
+        value: andrew
       - key: FRESHRSS_INSTALL
         value: |-
-          --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user andrew --language en
+          --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user ${FRESHRSS_DEFAULT_USER} --language en
       - key: FRESHRSS_USER
         value: |-
-          --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en --password ${ADMIN_PASSWORD} andrew
+          --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en --password ${ADMIN_PASSWORD} ${FRESHRSS_DEFAULT_USER}
