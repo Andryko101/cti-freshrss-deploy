@@ -6,6 +6,15 @@ services:
     region: oregon # (or your chosen region)
     plan: free
     envVars:
+      - key: FRESHRSS_INSTALL
+        value: |-
+          --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user andrew --language en
+      - key: FRESHRSS_USER
+        value: |-
+          --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en --password ${ADMIN_PASSWORD} andrew
+      # Add this explicit fallback variable that the Docker entrypoint script checks:
+      - key: FRESHRSS_DEFAULT_USER
+        value: andrew
       - key: TZ
         value: UTC
       - key: BASE_URL
