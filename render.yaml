@@ -17,7 +17,9 @@ services:
       - key: DB_USER
         value: freshrss
       - key: DB_PASSWORD
-        value: q3PWDCiHTJu9YORkVfdruhXU24hFatcc # Or paste your database password directly
+        value: q3PWDCiHTJu9YORkVfdruhXU24hFatcc 
+      - key: USER
+        value: andrew
       - key: ADMIN_EMAIL
         value: andrew@local.net
       - key: ADMIN_PASSWORD
