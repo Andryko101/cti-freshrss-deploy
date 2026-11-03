@@ -3,7 +3,7 @@ services:
     name: freshrss
     env: image
     image: freshrss/freshrss:latest
-    region: oregon # (or your chosen region)
+    region: oregon
     plan: free
     envVars:
       - key: TZ
@@ -29,4 +29,4 @@ services:
           --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user andrew --language en
       - key: FRESHRSS_USER
         value: |-
-          --user andrew --password ${ADMIN_PASSWORD} --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en
+          --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en --password ${ADMIN_PASSWORD} andrew
