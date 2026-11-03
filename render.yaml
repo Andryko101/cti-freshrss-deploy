@@ -1,33 +1,33 @@
 services:
   - type: web
     name: freshrss
-    runtime: image
-    image:
-      url: docker.io/freshrss/freshrss:latest   # TODO: pin to a specific version tag once you pick one
+    env: image
+    image: freshrss/freshrss:latest
     region: oregon
     plan: free
-
-    # Persistent disk keeps FreshRSS config and user data across restarts.
-    # Disks are NOT available on the free plan. To enable:
-    #   1. change `plan: free` to `plan: starter`
-    #   2. uncomment the block below
-    # disk:
-    #   name: freshrss-data
-    #   mountPath: /var/www/FreshRSS/data
-    #   sizeGB: 1
-
     envVars:
       - key: TZ
         value: UTC
-      - key: CRON_MIN
-        value: "1,31"
-
-      # Secrets: set these in the Render dashboard, not in the repo.
+      - key: BASE_URL
+        value: https://cti-freshrss.onrender.com
+      - key: DB_HOST
+        value: dpg-dbk6vfe7bikc739bggeg-a  # Update this with your actual Render PostgreSQL internal/external host
+      - key: DB_BASE
+        value: freshrss
+      - key: DB_USER
+        value: freshrss
+      - key: DB_PASSWORD
+        sync: false
+      - key: ADMIN_EMAIL
+        value: andrew@local.net
+      - key: ADMIN_PASSWORD
+        value: freshrss
+      - key: ADMIN_API_PASSWORD
+        value: freshrss
+      # --- Automatic Setup & User Provisioning ---
       - key: FRESHRSS_INSTALL
-        sync: false
-        # Dashboard value (single line, no ${...} variables; the entrypoint does not expand them):
-        # --api-enabled --base-url https://cti-freshrss.onrender.com --db-base freshrss --db-host dpg-dbk6vfe7bikc739bggeg-a --db-password <DB_PASSWORD> --db-type pgsql --db-user freshrss --default-user andrew --language en
+        value: |-
+          --api-enabled --base-url ${BASE_URL} --db-base ${DB_BASE} --db-host ${DB_HOST} --db-password ${DB_PASSWORD} --db-type pgsql --db-user ${DB_USER} --default-user andrew --language en
       - key: FRESHRSS_USER
-        sync: false
-        # Dashboard value:
-        # --user andrew --password <ADMIN_PASSWORD> --api-password <API_PASSWORD> --email andrew@local.net --language en
+        value: |-
+          --api-password ${ADMIN_API_PASSWORD} --email ${ADMIN_EMAIL} --language en --password ${ADMIN_PASSWORD} andrew
