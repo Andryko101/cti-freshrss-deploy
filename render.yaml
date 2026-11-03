@@ -1,3 +1,10 @@
+databases:
+  - name: freshrss-db
+    databaseName: freshrss
+    user: freshrss
+    plan: free
+    region: oregon
+
 services:
   - type: web
     name: freshrss
@@ -12,13 +19,21 @@ services:
       - key: BASE_URL
         value: https://cti-freshrss.onrender.com
       - key: DB_HOST
-        value: dpg-dbk6vfe7bikc739bggeg-a
+        fromDatabase:
+          name: freshrss-db
+          property: host
       - key: DB_BASE
-        value: freshrss
+        fromDatabase:
+          name: freshrss-db
+          property: database
       - key: DB_USER
-        value: freshrss
+        fromDatabase:
+          name: freshrss-db
+          property: user
       - key: DB_PASSWORD
-        sync: false
+        fromDatabase:
+          name: freshrss-db
+          property: password
       - key: ADMIN_EMAIL
         value: andrew@local.net
       - key: ADMIN_PASSWORD
